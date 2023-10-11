@@ -11,6 +11,10 @@ TagManager:
   - 
   - Water
   - UI
+  - Player1
+  - Player2
+  - P1Attack
+  - P2Attack
   - 
   - 
   - 
@@ -32,11 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NoTouchy
   m_SortingLayers:
   - name: Default
     uniqueID: 0

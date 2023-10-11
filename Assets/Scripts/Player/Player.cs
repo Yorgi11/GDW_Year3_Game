@@ -5,89 +5,121 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private string Name;
+    [SerializeField] private float maxHp;
     [SerializeField] private float baseAttack;
+    [SerializeField] private float rangedAttackRate;
     [SerializeField] private float comboMulti;
     [SerializeField] private float chainMulti;
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float SlowRate;
 
+    [SerializeField] private string[] ComboSequences;
+
+    [SerializeField] private Transform rangedSpawn;
+
+    [SerializeField] private Projectile projectilePrefab;
+
     [SerializeField] private LayerMask groundMask;
 
     private bool isGrounded = true;
-    private bool canJump = true;
-    private bool jabInput;
-    private bool crossInput;
-    private bool combo1Input;
+    private bool canRangedAttack = true;
+    private bool[] attacks;
 
     private int currentChain = 0;
 
-    private float vertin = 0f, horzin = 0f;
+    private float currentHp;
+    private float currentDMG;
+
+    private float inputReadTime = 0.25f;
 
     private Rigidbody rb;
+    private Animations ani;
+    private InputManager inputManager;
     void Start()
     {
+        attacks = new bool[ComboSequences.Length];
         rb = GetComponent<Rigidbody>();
+        ani = GetComponent<Animations>();
+        inputManager = GetComponent<InputManager>();
+        currentHp = maxHp;
+        currentDMG = baseAttack;
     }
     void Update()
     {
-        vertin = -Input.GetAxisRaw("Vertical");
-        horzin = Input.GetAxisRaw("Horizontal");
+        if (currentHp <= 0f) gameObject.SetActive(false);
+        currentDMG = baseAttack * (comboMulti > 0f ? comboMulti : 1f) * (chainMulti > 0f ? chainMulti : 1f);
 
         isGrounded = CheckGround();
-        canJump = Input.GetKey(KeyCode.Space);
-        combo1Input = Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.P);
-        jabInput = Input.GetKey(KeyCode.P) && !combo1Input;
-        crossInput = Input.GetKey(KeyCode.L) && !combo1Input;
 
-        if (vertin != 0f && horzin == 0f) rb.velocity = Vector3.Lerp(rb.velocity, transform.right * rb.velocity.magnitude * (vertin / vertin), SlowRate * Time.deltaTime); // if no vertical input lerp the forward force towards zero
-        else if (vertin == 0f && horzin != 0f) rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude * (horzin / horzin), SlowRate * Time.deltaTime); // if no horizontal input lerp the right force towards zero
-        else if (vertin == 0f && horzin == 0f) rb.velocity = Vector3.Lerp(rb.velocity, isGrounded ? Vector3.zero : new Vector3(0f, rb.velocity.y, 0f), SlowRate * Time.deltaTime); // if no movement input lerp the velocity to zero
+        CheckSequence();
+
+        //if (inputManager.RangedInput && canRangedAttack) RangedAttack();
+
+        // Movement // Start
+        if (inputManager.Vertin != 0f && inputManager.Horzin == 0f) rb.velocity = Vector3.Lerp(rb.velocity, (inputManager.Vertin / inputManager.Vertin) * rb.velocity.magnitude * transform.right, SlowRate * Time.deltaTime); // if no vertical input lerp the forward force towards zero
+        else if (inputManager.Vertin == 0f && inputManager.Horzin != 0f) rb.velocity = Vector3.Lerp(rb.velocity, (inputManager.Horzin / inputManager.Horzin) * rb.velocity.magnitude * transform.forward, SlowRate * Time.deltaTime); // if no horizontal input lerp the right force towards zero
+        else if (inputManager.Vertin == 0f && inputManager.Horzin == 0f) rb.velocity = Vector3.Lerp(rb.velocity, isGrounded ? Vector3.zero : new Vector3(0f, rb.velocity.y, 0f), SlowRate * Time.deltaTime); // if no movement input lerp the velocity to zero
 
         if (rb.velocity.magnitude > speed) rb.velocity = rb.velocity.normalized * speed;
-
-        //transform.position += speed * Time.deltaTime * (-vertin * transform.right + horzin * transform.forward);
-
-        //if (isGrounded && canJump && Input.GetKey(KeyCode.Space)) StartCoroutine(Jump());
-
-        //if (!isGrounded) transform.position += gravity * Time.deltaTime * Vector3.down;
+        // Movement // End
     }
     private void FixedUpdate()
     {
-        rb.AddForce((isGrounded ? speed : speed * 0.5f) * (vertin * transform.right + horzin * transform.forward), ForceMode.VelocityChange);
-        if (isGrounded && canJump) 
+        rb.AddForce((isGrounded ? speed : speed * 0.5f) * (inputManager.Vertin * transform.right + inputManager.Horzin * transform.forward), ForceMode.VelocityChange);
+        if (isGrounded && inputManager.Jump) 
         { 
             rb.velocity = new (rb.velocity.x, rb.velocity.y * 0.25f, rb.velocity.z); 
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse); 
         }
-
     }
     private bool CheckGround()
     {
         return Physics.Raycast(transform.position + Vector3.up * 0.25f, Vector3.down, 0.35f, groundMask);
     }
-    /*private IEnumerator Jump()
+    private void TakeDamage(float d)
     {
-        canJump = false;
-        float t = 0;
-        while (t < 0.25f)
+        if (currentHp - d > 0) currentHp -= d;
+        else currentHp = 0f;
+    }
+    private void CheckSequence()
+    {
+        for (int i = inputManager.CurrentSequence.Length - 1; i >= 0; i--) // loops from the last combo(most inputs) to the first combo (least inputs)
         {
-            t += Time.deltaTime;
-            transform.position += jumpSpeed * Time.deltaTime * transform.up * (1 / (t * 4f));
-            yield return null;
+            if (inputManager.CurrentSequence.Contains(ComboSequences[i])) StartCoroutine(ani.PlayAnimation(i)); // checks if the current input sequence matches the combosequence at i
         }
-        canJump = true;
-    }*/
-    public bool Jab
-    {
-        get { return jabInput; }
     }
-    public bool Cross
+    private void RangedAttack()
     {
-        get { return crossInput; }
+        Projectile p = Instantiate(projectilePrefab, rangedSpawn.position, transform.rotation, transform);
+        p.gameObject.layer = (gameObject.layer == 6 ? 8 : 9);
+        p.Direction = transform.forward;
+        StartCoroutine(ResetProjectileBall());
     }
-    public bool PunchCombo1
+    private IEnumerator ResetProjectileBall()
     {
-        get { return combo1Input; }
+        canRangedAttack = false;
+        yield return new WaitForSeconds(rangedAttackRate);
+        canRangedAttack = true;
+    }
+    public bool[] Attacks
+    {
+        get { return attacks; }
+    }
+    public float CurrentDMG
+    {
+        get { return currentDMG; }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 7)
+        {
+            TakeDamage(collision.gameObject.GetComponentInParent<Player>().CurrentDMG);
+        }
+        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 9)
+        {
+            TakeDamage(collision.gameObject.GetComponentInParent<Projectile>().DMG);
+        }
     }
 }

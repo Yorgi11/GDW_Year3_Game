@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
-
     private Player[] players;
-
-    GameObject temp;
     void Start()
     {
         players = FindObjectsOfType<Player>();
@@ -17,9 +13,13 @@ public class PlayerCam : MonoBehaviour
     void Update()
     {
         Vector3 pos = (players[0].transform.position + players[1].transform.position) * 0.5f;
-        transform.localPosition = pos + offset;
-        transform.right = (transform.position - players[0].transform.position).normalized;
-        transform.GetChild(0).right = (transform.GetChild(0).position - transform.position).normalized;
+        transform.localPosition = pos;
+        transform.forward = Vector3.ProjectOnPlane((transform.position - players[0].transform.position).normalized, Vector3.up);
+
+        players[0].transform.forward = (players[1].transform.position - players[0].transform.position).normalized;
+        players[1].transform.forward = (players[0].transform.position - players[1].transform.position).normalized;
+
+        //transform.GetChild(0).right = (transform.GetChild(0).position - transform.position).normalized;
         //transform.forward = transform.GetChild(0).right;
     }
 }

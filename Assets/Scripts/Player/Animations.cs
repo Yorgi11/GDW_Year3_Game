@@ -5,27 +5,20 @@ using UnityEngine;
 public class Animations : MonoBehaviour
 {
     [SerializeField] private Animator ani;
+    [SerializeField] private AnimationClip[] clips;
+    [SerializeField] private float[] speeds;
 
-    private bool punch2 = false;
-
-    private Player p;
-    private void Start()
+    private bool playing = false;
+    public IEnumerator PlayAnimation(int i)
     {
-        p = GetComponent<Player>();
+        playing = true;
+        ani.SetBool(clips[i].name, true);
+        yield return new WaitForSeconds(clips[i].length / speeds[i]);
+        ani.SetBool(clips[i].name, false);
+        playing = false;
     }
-    void Update()
+    public bool IsPlaying
     {
-        ani.SetBool("Jab", p.Jab);
-        ani.SetBool("Cross", p.Cross);
-        ani.SetBool("PunchCombo1", p.PunchCombo1);
-       /* ani.SetBool("Moving", p.IsMoving);
-        ani.SetBool("Run", p.IsRunning && rb.velocity.magnitude >= p.WalkSpeed * 0.25f);
-        ani.SetBool("Grounded", p.IsGrounded);
-        ani.SetBool("AboutToLand", p.IsAboutToLand);
-        if (p.IsMelee && p.CanAttack) StartCoroutine(Melee());*/
-        //ani.SetBool("Melee", p.IsMelee && p.CanAttack);
-        //ani.SetBool("Punch2", punch2);
-        //punch2 = !punch2;
-        //p.CanAttack = false;
+        get { return playing; }
     }
 }
