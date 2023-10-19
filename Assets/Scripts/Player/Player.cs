@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private string Name;
     [SerializeField] private float maxHp;
     [SerializeField] private float baseAttack;
+    [SerializeField] private float blockingFactor;
     [SerializeField] private float rangedAttackRate;
     [SerializeField] private float comboMulti;
     [SerializeField] private float chainMulti;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
 
         isGrounded = CheckGround();
 
-        CheckSequence();
+        //CheckSequence();
 
         //if (inputManager.RangedInput && canRangedAttack) RangedAttack();
 
@@ -77,8 +78,9 @@ public class Player : MonoBehaviour
     {
         return Physics.Raycast(transform.position + Vector3.up * 0.25f, Vector3.down, 0.35f, groundMask);
     }
-    private void TakeDamage(float d)
+    public void TakeDamage(bool blockable, float d)
     {
+        if (inputManager.Blocking && blockable) d *= blockingFactor;
         if (currentHp - d > 0) currentHp -= d;
         else currentHp = 0f;
     }
@@ -111,7 +113,7 @@ public class Player : MonoBehaviour
         get { return currentDMG; }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 6 || collision.gameObject.layer == 7)
         {
@@ -121,5 +123,5 @@ public class Player : MonoBehaviour
         {
             TakeDamage(collision.gameObject.GetComponentInParent<Projectile>().DMG);
         }
-    }
+    }*/
 }

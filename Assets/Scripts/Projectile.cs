@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private string Name;
+    [SerializeField] private bool canBeBlocked = true;
     [SerializeField] private float damage;
     [SerializeField] private float speed;
     [SerializeField] private ParticleSystem p;
@@ -27,25 +28,22 @@ public class Projectile : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(dir.normalized * speed);
         }
     }
-    private void DestroyAttack()
+    private void DestroyAttack(Player p)
     {
-        Destroy(gameObject);
+        p.TakeDamage(canBeBlocked, damage);
         /*p.Stop();
         Instantiate(destroyedParticle, transform.position, Quaternion.identity, transform);
         Destroy(gameObject, destroyedParticle.main.duration);*/
+        Destroy(gameObject);
     }
 
     public Vector3 Direction
     {
         set { dir = value; }
     }
-    public float DMG
-    {
-        get { return damage; }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 7 || collision.gameObject.layer == 8 || collision.gameObject.layer == 9) DestroyAttack();
+        if (collision.gameObject.layer != gameObject.layer) DestroyAttack(collision.gameObject.GetComponentInParent<Player>());
     }
 }
