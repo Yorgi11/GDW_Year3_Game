@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 
         isGrounded = CheckGround();
 
-        //CheckSequence();
+        CheckSequence();
 
         //if (inputManager.RangedInput && canRangedAttack) RangedAttack();
 
@@ -86,9 +86,9 @@ public class Player : MonoBehaviour
     }
     private void CheckSequence()
     {
-        for (int i = inputManager.CurrentSequence.Length - 1; i >= 0; i--) // loops from the last combo(most inputs) to the first combo (least inputs)
+        for (int i = ComboSequences.Length - 1; i >= 0; i--) // loops from the last combo(most inputs) to the first combo (least inputs)
         {
-            if (inputManager.CurrentSequence.Contains(ComboSequences[i])) StartCoroutine(ani.PlayAnimation(i)); // checks if the current input sequence matches the combosequence at i
+            if (inputManager.CurrentSequence.Contains(ComboSequences[i]) && !ani.IsPlaying) StartCoroutine(ani.PlayAnimation(i)); // checks if the current input sequence matches the combosequence at i
         }
     }
     private void RangedAttack()

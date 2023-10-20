@@ -231,64 +231,64 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Xbox_LeftStickX0
-    descriptiveName: Right
-    descriptiveNegativeName: Left
-    negativeButton: 
-    positiveButton: 
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 0
-    snap: 0
+    gravity: 3
+    dead: 0.1
+    sensitivity: 3
+    snap: 1
     invert: 0
     type: 2
     axis: 0
     joyNum: 1
   - serializedVersion: 3
     m_Name: Xbox_LeftStickX1
-    descriptiveName: Right
-    descriptiveNegativeName: Left
-    negativeButton: 
-    positiveButton: 
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 0
-    snap: 0
+    gravity: 3
+    dead: 0.1
+    sensitivity: 3
+    snap: 1
     invert: 0
     type: 2
     axis: 0
     joyNum: 2
   - serializedVersion: 3
     m_Name: Xbox_LeftStickY0
-    descriptiveName: Up
-    descriptiveNegativeName: Down
-    negativeButton: 
-    positiveButton: 
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: down
+    positiveButton: up
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 0
-    snap: 0
+    gravity: 3
+    dead: 0.1
+    sensitivity: 3
+    snap: 1
     invert: 0
     type: 2
     axis: 1
     joyNum: 1
   - serializedVersion: 3
     m_Name: Xbox_LeftStickY1
-    descriptiveName: Up
-    descriptiveNegativeName: Down
-    negativeButton: 
-    positiveButton: 
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: down
+    positiveButton: up
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 0
-    snap: 0
+    gravity: 3
+    dead: 0.1
+    sensitivity: 3
+    snap: 1
     invert: 0
     type: 2
     axis: 1

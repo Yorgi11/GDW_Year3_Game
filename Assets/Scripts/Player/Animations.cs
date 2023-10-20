@@ -13,7 +13,7 @@ public class Animations : MonoBehaviour
     {
         playing = true;
         ani.SetBool(clips[i].name, true);
-        yield return new WaitForSeconds(clips[i].length / speeds[i]);
+        yield return new WaitForSeconds(clips[i].length * speeds[i]);
         ani.SetBool(clips[i].name, false);
         playing = false;
     }

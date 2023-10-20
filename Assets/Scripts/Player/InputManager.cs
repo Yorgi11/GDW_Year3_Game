@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
     private float Dvertin = 0f, Dhorzin = 0f;
     private float triggers = 0f;
 
-    private float inputTime = 0.75f;
+    private float inputTime = 0.5f;
     private float currentTime = 0f;
     private string currentSequence = "";
     private string lastSequence = "";
@@ -46,9 +46,9 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("Xbox_RB" + id)) { RB = true; currentSequence += 'r'; } // Right bumper
         else RB = false;
 
-        vertin = -Input.GetAxisRaw("Xbox_LeftStickY" + id); // Left joystick Back/Fourth
+        vertin = Input.GetAxisRaw("Xbox_LeftStickY" + id); // Left joystick Back/Fourth //Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
         horzin = Input.GetAxisRaw("Xbox_LeftStickX" + id); // Left joysstick Left/Right
-        Dvertin = -Input.GetAxisRaw("Xbox_DpadV" + id); // Dpad Back/Fourth
+        Dvertin = Input.GetAxisRaw("Xbox_DpadV" + id); // Dpad Back/Fourth
         Dhorzin = Input.GetAxisRaw("Xbox_DpadH" + id); // Dpad Left/Right
         triggers = Input.GetAxisRaw("Xbox_Triggers" + id); // Triggers
 
@@ -59,6 +59,7 @@ public class InputManager : MonoBehaviour
     public string CurrentSequence
     {
         get { return lastSequence; }
+        set { lastSequence = value; }
     }
     public bool Jump
     {
@@ -70,10 +71,10 @@ public class InputManager : MonoBehaviour
     }
     public float Vertin
     {
-        get { return vertin > Dvertin ? vertin : Dvertin; }
+        get { return Mathf.Abs(vertin) > Mathf.Abs(Dvertin) ? vertin : Dvertin; }
     }
     public float Horzin
     {
-        get { return horzin > Dhorzin ? horzin : Dhorzin; }
+        get { return Mathf.Abs(horzin) > Mathf.Abs(Dhorzin) ? horzin : Dhorzin; }
     }
 }
