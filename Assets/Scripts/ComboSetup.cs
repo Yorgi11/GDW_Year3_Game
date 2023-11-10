@@ -53,6 +53,8 @@ public class ComboSetup : MonoBehaviour
             if (timer > 0f) timer -= Time.deltaTime;
             else curAttack = null;
             ani.SetBool("Attacking", true);
+            LeftHand.Attack();
+            RightHand.Attack();
             return;
         }else ani.SetBool("Attacking", false);
 
@@ -124,8 +126,6 @@ public class ComboSetup : MonoBehaviour
         curAttack = att;
         timer = att.length;
         ani.Play(att.name, -1, 0);
-        LeftHand.CanDamage = true;
-        RightHand.CanDamage = true;
     }
 
     Attack GetAttackFromType(AttackType t)

@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = ((isGrounded ? speed : speed * 0.25f) * (transform.right * inputManager.Vertin + transform.forward * inputManager.Horzin));
+        rb.velocity = ((isGrounded ? speed : speed * 0.25f) * (inputManager.ID == 1 ? -1 : 1) * (transform.right * inputManager.Vertin + transform.forward * inputManager.Horzin));
         if (isGrounded && inputManager.Jump) 
         { 
             rb.velocity = new (rb.velocity.x, rb.velocity.y * 0.25f, rb.velocity.z); 

@@ -39,6 +39,10 @@ public class InputManager : MonoBehaviour
     {
         get { return blockInput; }
     }
+    public int ID
+    {
+        get { return id; }
+    }
     public float Vertin
     {
         get { return Mathf.Abs(vertin) > Mathf.Abs(Dvertin) ? vertin : Dvertin; }

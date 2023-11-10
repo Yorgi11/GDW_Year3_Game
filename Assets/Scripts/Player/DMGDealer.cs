@@ -9,21 +9,15 @@ public class DMGDealer : MonoBehaviour
     [SerializeField] private LayerMask mask;
     [SerializeField] private Player p;
 
-    private bool canDamage = true;
-
     private RaycastHit[] hits;
-    private void Update()
+
+    public void Attack()
     {
         hits = Physics.SphereCastAll(transform.position, 0.3f, Vector3.up, 0.5f, mask);
         foreach (RaycastHit hit in hits)
         {
-            if (canDamage) hit.collider.gameObject.GetComponentInParent<Player>().TakeDamage(canBeBlocked, p.CurrentDMG);
+            hit.collider.gameObject.GetComponentInParent<Player>().TakeDamage(canBeBlocked, p.CurrentDMG * Time.deltaTime);
             Debug.Log("Hit");
         }
-        canDamage = false;
-    }
-    public bool CanDamage
-    {
-        set { canDamage = value; }
     }
 }
