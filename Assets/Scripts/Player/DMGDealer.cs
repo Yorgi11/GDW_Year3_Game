@@ -11,28 +11,19 @@ public class DMGDealer : MonoBehaviour
 
     private bool canDamage = true;
 
-    private List<Collider> hits = new List<Collider>();
+    private RaycastHit[] hits;
     private void Update()
     {
-        hits = Physics.OverlapSphere(transform.position, 0.6f, mask).ToList<Collider>();
-        if (hits.Count > 0 && canDamage)
+        hits = Physics.SphereCastAll(transform.position, 0.3f, Vector3.up, 0.5f, mask);
+        foreach (RaycastHit hit in hits)
         {
-            foreach (Collider h in hits)
-            {
-                Player op = h.gameObject.GetComponentInParent<Player>();
-                if (op) { op.TakeDamage(canBeBlocked, p.CurrentDMG); op.GetComponent<Rigidbody>().AddForce(op.transform.forward * -30f, ForceMode.Impulse); }
-            }
+            if (canDamage) hit.collider.gameObject.GetComponentInParent<Player>().TakeDamage(canBeBlocked, p.CurrentDMG);
+            Debug.Log("Hit");
         }
         canDamage = false;
     }
-    public IEnumerator EnableDamage(float t)
-    {
-        canDamage = true;
-        yield return new WaitForSeconds(t);
-        canDamage = false;
-    }
-    /*public bool CanDamage
+    public bool CanDamage
     {
         set { canDamage = value; }
-    }*/
+    }
 }

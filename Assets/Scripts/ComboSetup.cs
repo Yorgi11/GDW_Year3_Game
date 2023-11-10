@@ -124,8 +124,8 @@ public class ComboSetup : MonoBehaviour
         curAttack = att;
         timer = att.length;
         ani.Play(att.name, -1, 0);
-        LeftHand.EnableDamage(timer);
-        RightHand.EnableDamage(timer);
+        LeftHand.CanDamage = true;
+        RightHand.CanDamage = true;
     }
 
     Attack GetAttackFromType(AttackType t)

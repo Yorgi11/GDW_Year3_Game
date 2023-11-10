@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotSpeed;
 
     [SerializeField] private Animator ani;
+    [SerializeField] private UIAnimation HPBar;
     [SerializeField] private Transform rangedSpawn;
 
     [SerializeField] private Projectile projectilePrefab;
@@ -42,6 +43,8 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        HPBar.SliderBar(maxHp, currentHp);
+
         if (currentHp <= 0f) gameObject.SetActive(false);
         currentDMG = baseAttack * (comboMulti > 0f ? comboMulti : 1f) * (chainMulti > 0f ? chainMulti : 1f);
 
