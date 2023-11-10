@@ -1766,7 +1766,7 @@ MonoBehaviour:
   B: 0
   LB: 0
   RB: 0
-  id: 1
+  id: 0
 --- !u!114 &302995601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3838,7 +3838,7 @@ MonoBehaviour:
   B: 0
   LB: 0
   RB: 0
-  id: 0
+  id: 1
 --- !u!114 &693554903
 MonoBehaviour:
   m_ObjectHideFlags: 0
