@@ -12,7 +12,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -69,7 +69,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 8.8
+    - _Shininess: 0.75
     - _Smoothness: 0.243
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -77,8 +77,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.8773585, g: 0.5090335, b: 0.73811364, a: 1}
+    - _AmbientColor: {r: 0.6415094, g: 0.31552288, b: 0.19668922, a: 1}
     - _Color: {r: 0.8679245, g: 0.6540584, b: 0.50356, a: 1}
+    - _DiffuseColor: {r: 0.5377358, g: 0.33228016, b: 0.3995129, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 1, g: 0, b: 0.97956085, a: 1}
     - _SpecularColor: {r: 1, g: 0, b: 0.67214394, a: 1}
   m_BuildTextureStacks: []

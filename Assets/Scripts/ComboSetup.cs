@@ -28,8 +28,11 @@ public class ComboSetup : MonoBehaviour
     float timer = 0f;
     float leeway = 0f;
     bool skip = false;
+
+    Player p;
     void Start()
     {
+        p = GetComponent<Player>();
         if (ani == null) ani = GetComponent<Animator>();
         PrimeCombos();
     }
@@ -48,13 +51,12 @@ public class ComboSetup : MonoBehaviour
     }
     void Update()
     {
+        p.IsAttacking = (curAttack != null);
         if (curAttack != null)
         {
             if (timer > 0f) timer -= Time.deltaTime;
             else curAttack = null;
             ani.SetBool("Attacking", true);
-            LeftHand.Attack();
-            RightHand.Attack();
             return;
         }else ani.SetBool("Attacking", false);
 
@@ -124,8 +126,16 @@ public class ComboSetup : MonoBehaviour
     void Attack(Attack att)
     {
         curAttack = att;
-        timer = att.length;
-        ani.Play(att.name, -1, 0);
+        timer = att.Length;
+        ani.Play(att.Name, -1, 0);
+        if (att.attackingParts.Length >= 1)
+        {
+            foreach (DMGDealer a in att.attackingParts)
+            {
+                a.StartCoroutine(a.Attack(timer, att.damage / att.attackingParts.Length));
+            }
+        }
+        else Debug.LogWarning("No attacking part(s) associated with " + att.Name + " on " + gameObject.name);
     }
 
     Attack GetAttackFromType(AttackType t)
@@ -140,8 +150,18 @@ public class ComboSetup : MonoBehaviour
 [System.Serializable]
 public class Attack
 {
-    public string name;
-    public float length;
+    public AnimationClip clip;
+    public float speed;
+    public float damage;
+    public DMGDealer[] attackingParts;
+    public string Name
+    {
+        get { return clip.name; }
+    }
+    public float Length
+    {
+        get { return clip.length / speed; }
+    }
 }
 [System.Serializable]
 public class ComboInput

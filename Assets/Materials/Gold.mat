@@ -12,7 +12,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -77,8 +77,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.9245283, g: 0.7956749, b: 0.65850836, a: 1}
+    - _AmbientColor: {r: 0.5849056, g: 0.4577381, b: 0.24554999, a: 1}
     - _Color: {r: 0.8773585, g: 0.7401702, b: 0.45109472, a: 1}
+    - _DiffuseColor: {r: 0.8773585, g: 0.42110178, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 1, g: 0.8835707, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

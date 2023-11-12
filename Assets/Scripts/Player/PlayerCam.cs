@@ -6,6 +6,7 @@ public class PlayerCam : MonoBehaviour
 {
     [SerializeField] private float maxDist;
     [SerializeField] private float camSpeed;
+    [SerializeField] private float camRotSpeed;
     [SerializeField] private Vector3 camOffset;
     private Player[] players;
     void Start()
@@ -19,7 +20,7 @@ public class PlayerCam : MonoBehaviour
         transform.parent.position = pos;
         transform.localPosition = Vector3.Lerp(transform.localPosition, camOffset, camSpeed * Time.deltaTime);
         //transform.forward = Vector3.ProjectOnPlane((transform.position - pos).normalized, Vector3.up);
-        transform.parent.forward = Vector3.ProjectOnPlane((players[1].transform.position - transform.parent.position).normalized, Vector3.up);
+        transform.parent.forward = Vector3.Slerp(transform.parent.forward, Vector3.ProjectOnPlane((players[1].transform.position - transform.parent.position).normalized, Vector3.up), camRotSpeed * Time.deltaTime);
 
         players[0].transform.forward = Vector3.Lerp(players[0].transform.forward, (players[1].transform.position - players[0].transform.position).normalized, players[0].RotateSpeed * Time.deltaTime);
         players[1].transform.forward = Vector3.Lerp(players[1].transform.forward, (players[0].transform.position - players[1].transform.position).normalized, players[1].RotateSpeed * Time.deltaTime);
