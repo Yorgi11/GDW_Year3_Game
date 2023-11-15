@@ -567,7 +567,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
-  p: {fileID: 693554899}
 --- !u!135 &82253498
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1641,7 +1640,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 297497356}
-  m_Layer: 6
+  - component: {fileID: 297497357}
+  - component: {fileID: 297497359}
+  - component: {fileID: 297497358}
+  m_Layer: 30
   m_Name: mixamorig:RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1664,6 +1666,51 @@ Transform:
   m_Father: {fileID: 952477328}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &297497357
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297497355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &297497358
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297497355}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &297497359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297497355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c130332d780325d4881984e841ea1a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeBlocked: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &302995595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,9 +1778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Zhen Lei
-  maxHp: 100
+  maxHp: 1000
   baseAttack: 15
-  blockingFactor: 0
+  blockingFactor: 1
   rangedAttackRate: 0.5
   comboMulti: 0
   chainMulti: 0
@@ -1782,30 +1829,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd4a2a1e07b3c54d933cacafe230cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftHand: {fileID: 1492903240}
-  RightHand: {fileID: 1932054113}
   Y_Attack:
     clip: {fileID: 7400000, guid: a783174042ed7d945820ca498426f594, type: 2}
     speed: 3
     damage: 15
+    numHits: 1
     attackingParts:
     - {fileID: 1492903240}
   X_Attack:
     clip: {fileID: 7400000, guid: 92976884ef0cd0242a071ab9e4a8b698, type: 2}
     speed: 4
     damage: 10
+    numHits: 1
     attackingParts:
     - {fileID: 1932054113}
   A_Attack:
     clip: {fileID: 7400000, guid: d9d579b87ada05449b49171f1ec5bf17, type: 2}
     speed: 1
     damage: 0
+    numHits: 0
     attackingParts: []
   B_Attack:
-    clip: {fileID: 7400000, guid: 78e1d227cfda5d7498bc543aa0c1d843, type: 2}
+    clip: {fileID: 7400000, guid: 02f21daaf1a7f224eb36bc086d2df6ee, type: 2}
     speed: 1
-    damage: 0
-    attackingParts: []
+    damage: 50
+    numHits: 1
+    attackingParts:
+    - {fileID: 723501227}
   combos:
   - name: RapidPunch
     inputs:
@@ -1816,7 +1866,8 @@ MonoBehaviour:
     comboAttack:
       clip: {fileID: 7400000, guid: 54611e5c80d431e48b6996cd44e8ad70, type: 2}
       speed: 2
-      damage: 44
+      damage: 60
+      numHits: 4
       attackingParts:
       - {fileID: 1492903240}
       - {fileID: 1932054113}
@@ -3541,7 +3592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 582186675}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: mixamorig:RightToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3562,104 +3613,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 776694492}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &608894303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 608894307}
-  - component: {fileID: 608894306}
-  - component: {fileID: 608894305}
-  - component: {fileID: 608894304}
-  m_Layer: 0
-  m_Name: Plane (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!64 &608894304
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608894303}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &608894305
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608894303}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a2ab0afd2d6b34e479738f599be0a219, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &608894306
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608894303}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &608894307
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608894303}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0783, y: 2.0783, z: 2.0783}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613497369
 GameObject:
@@ -3916,9 +3869,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: b
-  maxHp: 100
+  maxHp: 1000
   baseAttack: 15
-  blockingFactor: 0
+  blockingFactor: 1
   rangedAttackRate: 0.5
   comboMulti: 0
   chainMulti: 0
@@ -4001,27 +3954,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd4a2a1e07b3c54d933cacafe230cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftHand: {fileID: 1807158042}
-  RightHand: {fileID: 82253497}
   Y_Attack:
     clip: {fileID: 0}
     speed: 0
     damage: 0
+    numHits: 0
     attackingParts: []
   X_Attack:
     clip: {fileID: 0}
     speed: 0
     damage: 0
+    numHits: 0
     attackingParts: []
   A_Attack:
     clip: {fileID: 0}
     speed: 0
     damage: 0
+    numHits: 0
     attackingParts: []
   B_Attack:
     clip: {fileID: 0}
     speed: 0
     damage: 0
+    numHits: 0
     attackingParts: []
   combos: []
   comboLeeway: 0.2
@@ -4341,7 +4296,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 723501226}
-  m_Layer: 6
+  - component: {fileID: 723501227}
+  - component: {fileID: 723501228}
+  - component: {fileID: 723501229}
+  m_Layer: 30
   m_Name: mixamorig:LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4364,6 +4322,51 @@ Transform:
   m_Father: {fileID: 2016995409}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723501227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723501225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c130332d780325d4881984e841ea1a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeBlocked: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!135 &723501228
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723501225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &723501229
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723501225}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &725055152
 GameObject:
   m_ObjectHideFlags: 0
@@ -4501,7 +4504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776694492}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: mixamorig:RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6002,7 +6005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056696360}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: mixamorig:LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7783,6 +7786,7 @@ GameObject:
   - component: {fileID: 1492903239}
   - component: {fileID: 1492903241}
   - component: {fileID: 1492903240}
+  - component: {fileID: 1492903242}
   m_Layer: 6
   m_Name: mixamorig:LeftHand
   m_TagString: Untagged
@@ -7827,7 +7831,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
-  p: {fileID: 302995598}
 --- !u!135 &1492903241
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7841,6 +7844,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &1492903242
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492903238}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1516432298
 GameObject:
   m_ObjectHideFlags: 0
@@ -8921,7 +8940,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
-  p: {fileID: 693554899}
 --- !u!1 &1829307363
 GameObject:
   m_ObjectHideFlags: 0
@@ -9333,6 +9351,7 @@ GameObject:
   - component: {fileID: 1932054112}
   - component: {fileID: 1932054114}
   - component: {fileID: 1932054113}
+  - component: {fileID: 1932054115}
   m_Layer: 6
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
@@ -9377,7 +9396,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
-  p: {fileID: 302995598}
 --- !u!135 &1932054114
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9391,6 +9409,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &1932054115
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932054111}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1942262149
 GameObject:
   m_ObjectHideFlags: 0
@@ -9465,7 +9499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1947401862}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: mixamorig:LeftToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9857,7 +9891,7 @@ GameObject:
   - component: {fileID: 2086747625}
   - component: {fileID: 2086747624}
   - component: {fileID: 2086747623}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

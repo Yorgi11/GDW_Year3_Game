@@ -6,10 +6,6 @@ using UnityEngine.Events;
 public enum AttackType { Y = 0, X = 1, A = 2, B = 3 };
 public class ComboSetup : MonoBehaviour
 {
-    [Header("Hands")]
-    [SerializeField] private DMGDealer LeftHand;
-    [SerializeField] private DMGDealer RightHand;
-
     [Header("Attacks")]
     public Attack Y_Attack;
     public Attack X_Attack;
@@ -132,7 +128,7 @@ public class ComboSetup : MonoBehaviour
         {
             foreach (DMGDealer a in att.attackingParts)
             {
-                a.StartCoroutine(a.Attack(timer, att.damage / att.attackingParts.Length));
+                a.StartCoroutine(a.SetFor(true, att.damage / att.numHits, timer));
             }
         }
         else Debug.LogWarning("No attacking part(s) associated with " + att.Name + " on " + gameObject.name);
@@ -153,6 +149,7 @@ public class Attack
     public AnimationClip clip;
     public float speed;
     public float damage;
+    public int numHits = 0;
     public DMGDealer[] attackingParts;
     public string Name
     {

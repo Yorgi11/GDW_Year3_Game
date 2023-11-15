@@ -85,7 +85,9 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(bool blockable, float d)
     {
+        Debug.Log(d);
         if (inputManager.Blocking && blockable) d *= blockingFactor;
+        Debug.Log(d);
         if (currentHp - d > 0) currentHp -= d;
         else if (!die_ing) StartCoroutine(Die());
         rb.AddForce(10f * -transform.forward, ForceMode.Impulse);

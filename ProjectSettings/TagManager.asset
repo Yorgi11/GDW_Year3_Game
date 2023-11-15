@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Player1
@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - NoGroundTouch
   - NoTouchy
   m_SortingLayers:
   - name: Default

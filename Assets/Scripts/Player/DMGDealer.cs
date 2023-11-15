@@ -7,25 +7,24 @@ public class DMGDealer : MonoBehaviour
 {
     [SerializeField] private bool canBeBlocked = true;
     [SerializeField] private LayerMask mask;
-    [SerializeField] private Player p;
 
-    private RaycastHit[] hits;
-
-    public IEnumerator Attack(float t, float d)
+    private bool canAttack = false;
+    private float d;
+    private void UseAttack(Player p)
     {
-        while (t > 0f)
-        {
-            hits = Physics.SphereCastAll(transform.position, 0.3f, Vector3.up, 0.5f, mask);
-            if (hits.Length <= 1)
-            {
-                foreach (RaycastHit hit in hits)
-                {
-                    hit.collider.gameObject.GetComponentInParent<Player>().TakeDamage(canBeBlocked, d * Time.deltaTime);
-                }
-            }
-            else break;
-            t -= Time.deltaTime;
-            yield return null;
-        }
+        Debug.Log(d);
+        p.TakeDamage(canBeBlocked, d);
+    }
+    public IEnumerator SetFor(bool state, float v, float t)
+    {
+        canAttack = state;
+        d = v;
+        yield return new WaitForSeconds(t);
+        d = 0f;
+        canAttack = !state;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((collision.gameObject.layer == 6 || collision.gameObject.layer == 7) && canAttack) UseAttack(collision.gameObject.GetComponent<Player>());
     }
 }
