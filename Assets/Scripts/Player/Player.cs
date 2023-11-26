@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float SlowRate;
     [SerializeField] private float rotSpeed;
+    [SerializeField] private string forward;
+    [SerializeField] private string backward;
+    [SerializeField] private string left;
+    [SerializeField] private string right;
 
     [SerializeField] private Animator ani;
     [SerializeField] private UIAnimation HPBar;
@@ -59,10 +63,10 @@ public class Player : MonoBehaviour
         else if (inputManager.Vertin == 0f && inputManager.Horzin != 0f) rb.velocity = Vector3.Lerp(rb.velocity, (inputManager.Horzin / inputManager.Horzin) * rb.velocity.magnitude * transform.forward, SlowRate * Time.deltaTime); // if no horizontal input lerp the right force towards zero
         else if (inputManager.Vertin == 0f && inputManager.Horzin == 0f) rb.velocity = Vector3.Lerp(rb.velocity, isGrounded ? Vector3.zero : new Vector3(0f, rb.velocity.y, 0f), SlowRate * Time.deltaTime); // if no movement input lerp the velocity to zero
 
-        ani.SetBool("WalkL", inputManager.Vertin > 0.1f);
-        ani.SetBool("WalkR", inputManager.Vertin < -0.1f);
-        ani.SetBool("WalkF", inputManager.Horzin > 0.1f);
-        ani.SetBool("WalkB", inputManager.Horzin < -0.1f);
+        ani.SetBool(left, inputManager.Vertin > 0.1f);
+        ani.SetBool(right, inputManager.Vertin < -0.1f);
+        ani.SetBool(forward, inputManager.Horzin > 0.1f);
+        ani.SetBool(backward, inputManager.Horzin < -0.1f);
 
         if (rb.velocity.magnitude > speed) rb.velocity = rb.velocity.normalized * speed;
         // Movement // End

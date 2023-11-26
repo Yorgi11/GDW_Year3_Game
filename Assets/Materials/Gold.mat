@@ -69,9 +69,10 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 37
+    - _Shininess: 1
     - _Smoothness: 0.687
     - _SmoothnessTextureChannel: 0
+    - _Specular: 0.5
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0

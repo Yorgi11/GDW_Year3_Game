@@ -128,7 +128,7 @@ public class ComboSetup : MonoBehaviour
         {
             foreach (DMGDealer a in att.attackingParts)
             {
-                a.StartCoroutine(a.SetFor(true, att.damage / att.numHits, timer));
+                StartCoroutine(a.SetFor(true, att.damage / att.numHits, timer));
             }
         }
         else Debug.LogWarning("No attacking part(s) associated with " + att.Name + " on " + gameObject.name);
