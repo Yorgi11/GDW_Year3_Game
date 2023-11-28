@@ -12,6 +12,10 @@ public class GameManager : Singleton_template<GameManager>
 
     private bool p1IsDead = false;
     private bool p2IsDead = false;
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     void Update()
     {
         if (p1IsDead || p2IsDead)
@@ -23,7 +27,7 @@ public class GameManager : Singleton_template<GameManager>
 
             winLoseMenu.SetActive(true);
 
-            //Time.timeScale = Mathf.Lerp(1f, 0f, 1f * Time.deltaTime);
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 0f, 1f * Time.deltaTime);
         }
         if (Input.GetKeyDown(KeyCode.L)) p2.TakeDamage(true, 100);
     }

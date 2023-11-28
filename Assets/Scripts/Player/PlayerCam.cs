@@ -20,7 +20,8 @@ public class PlayerCam : MonoBehaviour
         transform.parent.position = pos;
         transform.localPosition = Vector3.Lerp(transform.localPosition, camOffset, camSpeed * Time.deltaTime);
 
-        transform.parent.forward = Vector3.Slerp(transform.parent.forward, (players[1].transform.position - transform.parent.position).normalized, camRotSpeed * Time.deltaTime);
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.LookRotation((players[1].transform.position - pos).normalized, Vector3.up), camRotSpeed * Time.deltaTime);
+        //transform.parent.forward = Vector3.Slerp(transform.parent.forward, (players[1].transform.position - transform.parent.position).normalized, camRotSpeed * Time.deltaTime);
         players[0].transform.forward = Vector3.Lerp(players[0].transform.forward, (players[1].transform.position - players[0].transform.position).normalized, players[0].RotateSpeed * Time.deltaTime);
         players[1].transform.forward = Vector3.Lerp(players[1].transform.forward, (players[0].transform.position - players[1].transform.position).normalized, players[1].RotateSpeed * Time.deltaTime);
 

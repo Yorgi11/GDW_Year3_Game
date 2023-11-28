@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private bool isAttacking = false;
     private bool canRangedAttack = true;
 
+    public int id = 0;
     private int currentChain = 0;
 
     private float currentHp;
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
+        id = inputManager.ID;
         currentHp = maxHp;
         currentDMG = baseAttack;
     }
@@ -73,7 +75,7 @@ public class Player : MonoBehaviour
     {
         if (!isAttacking)
         {
-            rb.velocity += ((isGrounded ? speed : speed * 0.25f) * (inputManager.ID == 1 ? -1 : 1) * (transform.right * inputManager.Vertin + transform.forward * inputManager.Horzin));
+            rb.velocity += ((isGrounded ? speed : speed * 0.25f) * (id == 1 ? -1 : 1) * (transform.right * inputManager.Vertin + transform.forward * inputManager.Horzin));
             if (isGrounded && inputManager.Jump)
             {
                 rb.velocity = new(rb.velocity.x, rb.velocity.y * 0.15f, rb.velocity.z);
@@ -93,7 +95,7 @@ public class Player : MonoBehaviour
         if (currentHp <= 0) 
         { 
             currentHp = 0f;
-            GameManager.Instance().SetP(inputManager.ID);
+            GameManager.Instance().SetP(id);
             StartCoroutine(Die()); 
         }
     }

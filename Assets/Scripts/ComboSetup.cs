@@ -128,6 +128,8 @@ public class ComboSetup : MonoBehaviour
         {
             foreach (DMGDealer a in att.attackingParts)
             {
+                a.gameObject.SetActive(true);
+                a.timeSegment = timer / att.numHits;
                 StartCoroutine(a.SetFor(true, att.damage / att.numHits, timer));
             }
         }

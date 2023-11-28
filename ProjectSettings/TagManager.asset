@@ -33,9 +33,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - NoGroundTouch
+  - OnlyHitGround
+  - NoGroundTouchP2
+  - NoGroundTouchP1
   - NoTouchy
   m_SortingLayers:
   - name: Default
