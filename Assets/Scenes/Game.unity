@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Y_Attack:
     clip: {fileID: 7400000, guid: a783174042ed7d945820ca498426f594, type: 2}
-    speed: 3
+    speed: 4
     damage: 15
     numHits: 1
     attackingParts:

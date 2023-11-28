@@ -36,7 +36,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ZL_Cross
-  m_Speed: 3
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a783174042ed7d945820ca498426f594, type: 2}
+  m_Motion: {fileID: 7400000, guid: aff8b014445b3f74eaec6b0cf7aa8e7e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -438,7 +438,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 92976884ef0cd0242a071ab9e4a8b698, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3f4f986de119e9f448909d5dc7226b1d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
