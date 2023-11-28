@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
     private bool isGrounded = true;
-    private bool die_ing = false;
     private bool isAttacking = false;
     private bool canRangedAttack = true;
 
@@ -53,7 +52,6 @@ public class Player : MonoBehaviour
     {
         HPBar.SliderBar(maxHp, currentHp);
 
-        if (currentHp <= 0f) { ani.enabled = false; this.enabled = false; }
         currentDMG = baseAttack * (comboMulti > 0f ? comboMulti : 1f) * (chainMulti > 0f ? chainMulti : 1f);
 
         isGrounded = CheckGround();
@@ -89,20 +87,23 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(bool blockable, float d)
     {
-        Debug.Log(d);
         if (inputManager.Blocking && blockable) d *= blockingFactor;
-        Debug.Log(d);
-        if (currentHp - d > 0) currentHp -= d;
-        else if (!die_ing) StartCoroutine(Die());
+        currentHp -= d;
         rb.AddForce(10f * -transform.forward, ForceMode.Impulse);
+        if (currentHp <= 0) 
+        { 
+            currentHp = 0f;
+            GameManager.Instance().SetP(inputManager.ID);
+            StartCoroutine(Die()); 
+        }
     }
     private IEnumerator Die()
     {
-        die_ing = true;
         AnimationClip c = deathClips[(int)Random.Range(0f, deathClips.Length - 1f)];
         ani.Play(c.name);
         yield return new WaitForSeconds(c.length * 0.75f);
-        currentHp = 0f;
+        ani.enabled = false;
+        this.enabled = false;
     }
     public float CurrentDMG
     {

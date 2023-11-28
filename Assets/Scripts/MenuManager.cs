@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     private  List<GameObject> open = new List<GameObject>();
     private void Start()
     {
-        ShowMenu(mainMenu);
+        if (mainMenu) ShowMenu(mainMenu);
     }
     public void LoadGameScene()
     {
