@@ -31,11 +31,11 @@ public class DMGDealer : MonoBehaviour
         yield return new WaitForSeconds(timeSegment);
         canAttack = true;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if ((collision.gameObject.layer == 6 || collision.gameObject.layer == 7) && canAttack) 
+        if ((other.gameObject.layer == 6 || other.gameObject.layer == 7) && canAttack)
         {
-            UseAttack(collision.gameObject.GetComponent<Player>());
+            UseAttack(other.gameObject.GetComponentInParent<Player>());
         }
     }
 }

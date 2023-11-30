@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform rangedSpawn;
 
     [SerializeField] private AnimationClip[] deathClips;
+    [SerializeField] private AnimationClip[] hitClips;
 
     [SerializeField] private Projectile projectilePrefab;
 
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(bool blockable, float d)
     {
+        ani.Play(hitClips[(int)Random.Range(0f, hitClips.Length - 1f)].name);
         if (inputManager.Blocking && blockable) d *= blockingFactor;
         currentHp -= d;
         rb.AddForce(10f * -transform.forward, ForceMode.Impulse);
