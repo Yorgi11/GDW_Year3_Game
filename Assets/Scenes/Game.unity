@@ -2389,6 +2389,13 @@ MonoBehaviour:
   ani: {fileID: 5866666021597213839}
   HPBar: {fileID: 71004339}
   rangedSpawn: {fileID: 0}
+  audioSource: {fileID: 0}
+  HitSFX:
+  - {fileID: 8300000, guid: b6705b87023095a47a6a4301cb082bcd, type: 3}
+  - {fileID: 8300000, guid: 09b27cc40901cbb4c8740f2d57e875f7, type: 3}
+  - {fileID: 8300000, guid: 8eea0f43cacc02245b782c47d447d5cf, type: 3}
+  StepsSFX: {fileID: 0}
+  AttackSFX: {fileID: 0}
   deathClips:
   - {fileID: 7400000, guid: 78e1d227cfda5d7498bc543aa0c1d843, type: 2}
   - {fileID: 7400000, guid: dcba163c2ec0c7f4386a23579994c341, type: 2}
@@ -5217,6 +5224,10 @@ MonoBehaviour:
   ani: {fileID: 5866666021570656811}
   HPBar: {fileID: 832012398}
   rangedSpawn: {fileID: 0}
+  audioSource: {fileID: 0}
+  HitSFX: []
+  StepsSFX: {fileID: 0}
+  AttackSFX: {fileID: 0}
   deathClips:
   - {fileID: 7400000, guid: 78e1d227cfda5d7498bc543aa0c1d843, type: 2}
   - {fileID: 7400000, guid: dcba163c2ec0c7f4386a23579994c341, type: 2}

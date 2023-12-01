@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator ani;
     [SerializeField] private UIAnimation HPBar;
     [SerializeField] private Transform rangedSpawn;
+    public AudioSource audioSource;
+    [SerializeField] public AudioClip[] HitSFX;
+    [SerializeField] private AudioClip StepsSFX;
+    [SerializeField] private AudioClip AttackSFX;
 
     [SerializeField] private AnimationClip[] deathClips;
     [SerializeField] private AnimationClip[] hitClips;
