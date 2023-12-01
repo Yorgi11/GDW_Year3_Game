@@ -9,17 +9,18 @@ public class GameManager : Singleton_template<GameManager>
     [SerializeField] private TextMeshProUGUI P1_Text;
     [SerializeField] private TextMeshProUGUI P2_Text;
     [SerializeField] private Player p2;
-    public AudioSource audioSource;
     [SerializeField] private AudioClip Backmusic;
     float timer;
     float bgtime = 14.5f;
 
     private bool p1IsDead = false;
     private bool p2IsDead = false;
+    private AudioSource audioSource;
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = Backmusic;
         audioSource.Play();
-        Time.timeScale = 1f;
     }
     void Update()
     {

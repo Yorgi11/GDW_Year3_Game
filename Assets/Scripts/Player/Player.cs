@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator ani;
     [SerializeField] private UIAnimation HPBar;
     [SerializeField] private Transform rangedSpawn;
-    public AudioSource audioSource;
     [SerializeField] public AudioClip[] HitSFX;
     [SerializeField] private AudioClip[] StepsSFX;
     [SerializeField] public AudioClip[] AttackSFX;
@@ -45,12 +44,15 @@ public class Player : MonoBehaviour
     private float currentHp;
     private float currentDMG;
 
+    private AudioSource audioSource;
+
     private Rigidbody rb;
     private InputManager inputManager;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
+        audioSource = GetComponent<AudioSource>();
         id = inputManager.ID;
         currentHp = maxHp;
         currentDMG = baseAttack;
@@ -94,9 +96,12 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(bool blockable, float d)
     {
-        ani.Play(hitClips[(int)Random.Range(0f, hitClips.Length - 1f)].name);
-        audioSource.clip = HitSFX[(int)Random.Range(0f, HitSFX.Length - 1)];
-        audioSource.Play();
+        if (hitClips.Length > 0) ani.Play(hitClips[(int)Random.Range(0f, hitClips.Length - 1f)].name);
+        if (HitSFX.Length > 0)
+        {
+            audioSource.clip = HitSFX[(int)Random.Range(0f, HitSFX.Length - 1)];
+            audioSource.Play();
+        }
         if (inputManager.Blocking && blockable) d *= blockingFactor;
         currentHp -= d;
         rb.AddForce(10f * -transform.forward, ForceMode.Impulse);
@@ -128,9 +133,16 @@ public class Player : MonoBehaviour
         get { return isAttacking; }
         set { isAttacking = value; }
     }
-
+    public AudioSource Source
+    {
+        get { return audioSource; }
+    }
     public AudioClip[] SFXAtk
     {
         get { return AttackSFX; }
+    }
+    public AudioClip[] SFXsteps
+    {
+        get { return StepsSFX; }
     }
 }
