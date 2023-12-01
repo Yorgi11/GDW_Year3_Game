@@ -18,6 +18,7 @@ public class GameManager : Singleton_template<GameManager>
     private AudioSource audioSource;
     private void Start()
     {
+        Time.timeScale = 1f;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = Backmusic;
         audioSource.Play();
