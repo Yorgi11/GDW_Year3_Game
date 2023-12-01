@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform rangedSpawn;
     public AudioSource audioSource;
     [SerializeField] public AudioClip[] HitSFX;
-    [SerializeField] private AudioClip StepsSFX;
-    [SerializeField] private AudioClip AttackSFX;
+    [SerializeField] private AudioClip[] StepsSFX;
+    [SerializeField] public AudioClip[] AttackSFX;
 
     [SerializeField] private AnimationClip[] deathClips;
     [SerializeField] private AnimationClip[] hitClips;
@@ -127,5 +127,10 @@ public class Player : MonoBehaviour
     {
         get { return isAttacking; }
         set { isAttacking = value; }
+    }
+
+    public AudioClip[] SFXAtk
+    {
+        get { return AttackSFX; }
     }
 }

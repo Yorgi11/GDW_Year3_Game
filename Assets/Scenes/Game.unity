@@ -2394,8 +2394,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b6705b87023095a47a6a4301cb082bcd, type: 3}
   - {fileID: 8300000, guid: 09b27cc40901cbb4c8740f2d57e875f7, type: 3}
   - {fileID: 8300000, guid: 8eea0f43cacc02245b782c47d447d5cf, type: 3}
-  StepsSFX: {fileID: 0}
-  AttackSFX: {fileID: 0}
+  StepsSFX:
+  - {fileID: 8300000, guid: 3e1cf318b3036b242ab3fe220a289201, type: 3}
+  - {fileID: 8300000, guid: 303ebe1889428be4db73191dca1780fb, type: 3}
+  - {fileID: 8300000, guid: 24b8803eb62ac6c40939d616e08ad85c, type: 3}
+  AttackSFX:
+  - {fileID: 8300000, guid: e2583f5d282ee834f9448a317e824ff1, type: 3}
+  - {fileID: 8300000, guid: a8cd4f9245d633744b55084edb17b13e, type: 3}
+  - {fileID: 8300000, guid: ba11ce5c918ab8b478edfdbff07613f0, type: 3}
   deathClips:
   - {fileID: 7400000, guid: 78e1d227cfda5d7498bc543aa0c1d843, type: 2}
   - {fileID: 7400000, guid: dcba163c2ec0c7f4386a23579994c341, type: 2}
@@ -5226,8 +5232,8 @@ MonoBehaviour:
   rangedSpawn: {fileID: 0}
   audioSource: {fileID: 0}
   HitSFX: []
-  StepsSFX: {fileID: 0}
-  AttackSFX: {fileID: 0}
+  StepsSFX: []
+  AttackSFX: []
   deathClips:
   - {fileID: 7400000, guid: 78e1d227cfda5d7498bc543aa0c1d843, type: 2}
   - {fileID: 7400000, guid: dcba163c2ec0c7f4386a23579994c341, type: 2}
@@ -14124,6 +14130,8 @@ MonoBehaviour:
   P1_Text: {fileID: 130024789}
   P2_Text: {fileID: 2132419167}
   p2: {fileID: 693554899}
+  audioSource: {fileID: 0}
+  Backmusic: {fileID: 8300000, guid: b8c46d6c94aa6f040bc92293b7a930ef, type: 3}
 --- !u!1 &2102978298
 GameObject:
   m_ObjectHideFlags: 0

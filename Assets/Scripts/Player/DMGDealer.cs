@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class DMGDealer : MonoBehaviour
 {
+    private Player player;
+
     [SerializeField] private bool canBeBlocked = true;
     [SerializeField] private LayerMask mask;
 
     private bool canAttack = false;
     private float d;
     public float timeSegment = 0f;
+    private void Start()
+    {
+        player = GetComponentInParent<Player>();
+    }
     private void UseAttack(Player p)
     {
         p.TakeDamage(canBeBlocked, d);
@@ -36,6 +42,8 @@ public class DMGDealer : MonoBehaviour
         if ((other.gameObject.layer == 6 || other.gameObject.layer == 7) && canAttack)
         {
             UseAttack(other.gameObject.GetComponentInParent<Player>());
+            //player.audioSource.clip = SFXatk[(int)Random.Range(0f, AttackSFX.Length - 1)];
+            //player.audioSource.Play();
         }
     }
 }
