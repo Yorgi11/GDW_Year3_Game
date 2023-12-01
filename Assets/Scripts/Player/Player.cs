@@ -95,6 +95,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(bool blockable, float d)
     {
         ani.Play(hitClips[(int)Random.Range(0f, hitClips.Length - 1f)].name);
+        audioSource.clip = HitSFX[(int)Random.Range(0f, HitSFX.Length - 1)];
+        audioSource.Play();
         if (inputManager.Blocking && blockable) d *= blockingFactor;
         currentHp -= d;
         rb.AddForce(10f * -transform.forward, ForceMode.Impulse);
